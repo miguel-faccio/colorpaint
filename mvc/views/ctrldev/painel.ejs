@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Administração</title>
+    <link rel="stylesheet" href="styles/painel.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="login.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a></li>
+    
+                </ul>
+            </nav>
+        </div>
+        <div class="content">
+            <header class="header">
+                <h1>Dashboard de Administração</h1>
+                <div class="nav">
+                    <ul>
+                        <li><a href="#" class="nav-link"></a></li>
+                    </ul>
+                </div>
+                <div class="datetime">
+                    <p id="current-datetime"></p>
+                </div>
+            </header>
+            <section class="section">
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>Total de Usuários</h3>
+                        <p id="total-usuarios">150</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Total de Desenhos</h3>
+                        <p id="total-desenhos">45</p>
+                    </div>
+                </div>
+                <div class="charts">
+                    <div class="chart-container">
+                        <canvas id="usuarios-chart" class="chart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="desenhos-chart" class="chart"></canvas>
+                    </div>
+                </div>
+            </section>
+            <section class="section">
+                <h2>Usuários</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Senha</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>joao.silva@example.com</td>
+                            <td>123</td>
+                            <td>
+                                <button type="button" class="edit-btn" onclick="location.href='editarUser.html'">Editar</button>
+                                <button class="delete-btn">Excluir</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section class="section">
+                <h2>Desenhos</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagem</th>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>Data e Hora</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="desenho.jpg" alt="Desenho" style="width: 50px; height: auto;"></td>
+                            <td>Natureza Morta</td>
+                            <td>Maria Souza</td>
+                            <td>15/05/2024 14:30</td>
+                            <td>
+                                 <button class="delete-btn">Excluir</button>
+                            </td>
+                        </tr>
+                        <!-- Adicione mais linhas conforme necessário -->
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Exibir data e hora atual
+            function updateDateTime() {
+                const now = new Date();
+                const formattedDateTime = now.toLocaleString('pt-BR', { dateStyle: 'full', timeStyle: 'long' });
+                document.getElementById('current-datetime').innerText = formattedDateTime;
+            }
+
+            // Atualizar data e hora a cada segundo
+            setInterval(updateDateTime, 1000);
+            updateDateTime();
+
+            // Dados de exemplo para o gráfico de barras (usuários)
+            const usuariosData = {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                datasets: [{
+                    label: 'Novos Usuários',
+                    data: [10, 20, 30, 40, 50],
+                    backgroundColor: [
+                        '#007bff', // Azul mais escuro
+                        '#4e86e4', // Azul médio
+                        '#96ccff', // Azul claro
+                        '#b3d9ff', // Azul mais claro
+                        '#cce6ff'  // Azul muito claro
+                    ],
+                    borderColor: '#007bff', // Cor da borda
+                    borderWidth: 1
+                }]
+            };
+
+            // Opções para o gráfico de barras (usuários)
+            const usuariosOptions = {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+
+            // Renderizar o gráfico de barras (usuários)
+            const usuariosCtx = document.getElementById('usuarios-chart').getContext('2d');
+            const usuariosChart = new Chart(usuariosCtx, {
+                type: 'bar',
+                data: usuariosData,
+                options: usuariosOptions
+            });
+
+            // Dados de exemplo para o gráfico de barras (desenhos)
+            const desenhosData = {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio'],
+                datasets: [{
+                    label: 'Novos Desenhos',
+                    data: [5, 15, 10, 25, 20],
+                    backgroundColor: [
+                        '#007bff', // Azul mais escuro
+                        '#4e86e4', // Azul médio
+                        '#96ccff', // Azul claro
+                        '#b3d9ff', // Azul mais claro
+                        '#cce6ff'  // Azul muito claro
+                    ],
+                    borderColor: '#007bff', // Cor da borda
+                    borderWidth: 1
+                }]
+            };
+
+            // Opções para o gráfico de barras (desenhos)
+            const desenhosOptions = {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            };
+            const desenhosCtx = document.getElementById('desenhos-chart').getContext('2d');
+const desenhosChart = new Chart(desenhosCtx, {
+    type: 'bar',
+    data: desenhosData,
+    options: desenhosOptions
+});
+});
+</script>
+</body>
+</html>

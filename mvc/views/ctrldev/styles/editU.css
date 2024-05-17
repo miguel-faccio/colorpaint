@@ -1,0 +1,106 @@
+body {
+    font-family: "Rajdhani", sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #041229, #3b598d, #dfe9f9);
+    height: 100vh;
+    display: flex;
+}
+
+.container {
+    background-color: rgba(255, 255, 255, 0.119);
+    border-radius: 10px;
+    width: 20%; 
+    height: 65%; 
+    padding: 30px;
+    margin-left: 5px; 
+    margin-right: auto; 
+    margin-top: auto;
+    margin-bottom: auto;
+    border: solid 3px #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+h1 {
+    color: #ffffff;
+    font-size: 23px;
+    font-family: "Rajdhani", sans-serif;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    color: #ffffff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8)
+    ;text-align: center;
+}
+
+.input-group input:focus {
+    border-color: #132b47;
+    outline: none;
+}
+    
+
+button {
+    background-color: #062951a9;
+    color: #fff;
+    padding: 12px 0;
+    border: none;
+    margin-top: 55px;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    font-family: "Rajdhani", sans-serif;
+    transition: background-color 0.4s ease;
+}
+
+button:hover {
+    background-color: #1b3a5e6e;
+}
+
+.sidebar {
+    background-color: #32486F;
+    color: #fff;
+    width: 200px;
+    padding-top: 20px;
+    margin-right: auto;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-family: "Rajdhani", sans-serif;
+}

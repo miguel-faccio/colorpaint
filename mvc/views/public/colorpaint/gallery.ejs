@@ -17,7 +17,7 @@
 <body>
     <div class="off-canvas">
         <video autoplay muted loop class="background-video">
-            <source src="../videos/ocean.mp4" type="video/mp4">
+            <source src="../videos/oceano.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="off-canvas-content">
@@ -26,8 +26,8 @@
             </button>
             <div class="profile">
                 <h2>Perfil do Usuário</h2>
-                <div class="username">Username</div>
-                <a class="off-canvas-button" href="index.html">Logoff</a>
+                <div class="username"><%= username %></div>
+                <a class="off-canvas-button" href="/logout">Logoff</a>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
             </button>
             <h1>Galeria de Desenhos</h1>
             
-            <a class="draw-button" href="../colorpaint/canva.html">
+            <a class="draw-button" href="/home">
                 <span class="material-symbols-outlined">brush</span>
                 Desenhar
             </a>

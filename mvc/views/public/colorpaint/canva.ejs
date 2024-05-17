@@ -11,7 +11,7 @@
 <body>
     <div class="off-canvas">
         <video autoplay muted loop class="background-video">
-            <source src="../videos/ocean.mp4" type="video/mp4">
+            <source src="../videos/oceano.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
         <div class="off-canvas-content">
@@ -20,9 +20,12 @@
             </button>
             <div class="profile">
                 <h2>Perfil do Usuário</h2>
-                <div class="username">Username</div> <!-- Adicionado para o nome de usuário -->
-                <a class="off-canvas-button" href="gallery.html">Galeria</a>
-                <a class="off-canvas-button" href="index.html">Logoff</a>
+                <div class="username"><%= username %></div> 
+                <div class="date"></div>
+                <a class="off-canvas-button" href="/gallery">Galeria</a>
+                <form action="/logout" method="POST" style="display:inline;">
+                    <button type="submit" class="off-canvas-button">Logoff</button>
+                </form>
             </div>
         </div>
     </div>
@@ -65,5 +68,19 @@
         <canvas width="1080" height="700"></canvas>
     </section>
     <script src="../js/canvascript.js"></script>
+    <script>
+        function formatarData(data) {
+            var dia = data.getDate();
+            var mes = data.getMonth() + 1;
+            var ano = data.getFullYear();
+            return dia + '/' + mes + '/' + ano;
+        }
+
+        var dataAtual = new Date();
+
+        var dataFormatada = formatarData(dataAtual);
+
+        document.querySelector('.date').textContent = 'Data: ' + dataFormatada;
+    </script>
 </body>
 </html>
