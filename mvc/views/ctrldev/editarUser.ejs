@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Dados</title>
-    <link rel="stylesheet" href="styles/editU.css">
-
+    <link rel="stylesheet" href="/styles/editU.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
@@ -13,23 +12,23 @@
 <body>
     <div class="sidebar">
         <ul>
-            <li><a href="painel.html"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a></li>
+            <li><a href="/admin"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-440 224 224-57 56-320-320 320-320 57 56-224 224h487v80H313Z"/></svg></a></li>
         </ul>
     </div>
     <div class="container">
         <h1>EDITAR DADOS</h1>
-        <form action="#" method="POST">
+        <form action="/update-user/<%= usuario.id %>" method="POST">
             <div class="input-group">
-                <label for="nome">nome:</label>
-                <input type="text" id="nome" name="nome" placeholder=" atualizar nome " required>
+                <label for="username">Nome:</label>
+                <input type="text" id="username" name="username" value="<%= usuario.username %>" required>
             </div>
             <div class="input-group">
-                <label for="email">email:</label>
-                <input type="email" id="email" name="email" placeholder=" atualizar email" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="<%= usuario.email %>" required>
             </div>
             <div class="input-group">
-                <label for="email">senha:</label>
-                <input type="email" id="senha" name="senha" placeholder="atualizar senha" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">Salvar Alterações</button>
         </form>

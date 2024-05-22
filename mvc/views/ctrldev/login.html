@@ -7,38 +7,35 @@
     <link rel="stylesheet" href="styles/login.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="video-container">
         <video autoplay muted loop id="background-video">
-            <source src="../public/videos/oceano.mp4" type="video/mp4">
+            <source src="videos/oceano.mp4" type="video/mp4">
             Seu navegador não suporta vídeos HTML5.
         </video>
         <div class="overlay"></div>
     </div>
 
     <div class="principal-container">
-    <div class="logo">
-        <img src="mvc/views/public/images/logo.png">
+        <div class="logo">
+            <img src="images/logo.png">
+        </div>
+        <div class="login-container">    
+            <h2>LOGIN ADMIN</h2>
+            <form action="/loginadm" method="POST">
+                <div class="input-group">
+                    <input type="text" id="email" placeholder="Email" name="email" required>
+                </div>
+                <div class="input-group">              
+                    <input type="password" id="password" placeholder="Senha" name="password" required>
+                </div>
+                <button type="submit">ENTRAR</button>
+            </form>
+            <a href="/cadadm">Cadastre-se</a>
+        </div>
     </div>
-    <div class="login-container">    
-        
-        <h2>LOGIN ADIMIN</h2>
-
-        
-        <form action="/loginAdm" method="POST">
-            <div class="input-group">
-                <input type="text" id="username" placeholder="email"  name="username" required>
-            </div>
-            <div class="input-group">              
-                <input type="password" id="password"  placeholder="senha" name="password" required>
-            </div>
-            <button type="submit">ENTRAR</button>
-        </form>
-        <a href="/cadadm">Cadastra-se</a>
-    </div>
-</div>
 </body>
 </html>
