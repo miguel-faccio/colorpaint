@@ -10,7 +10,7 @@ const profileButton = document.querySelector(".profile-button");
 const offCanvas = document.querySelector(".off-canvas");
 const offCanvasClose = document.querySelector(".off-canvas-close");
 
-ctx.fillStyle = "#FFFFFF";
+ctx.fillStyle = "#fff";
 ctx.fillRect(0, 0, canvas.width, canvas.height); 
 
 let brushSize = 20;
@@ -109,3 +109,5 @@ profileButton.addEventListener("click", () => {
 offCanvasClose.addEventListener("click", () => {
     offCanvas.classList.remove("open");
 });
+
+

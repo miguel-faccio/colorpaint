@@ -4,6 +4,27 @@ const express = require("express");
 const session = require('express-session');
 const Database = require('./repository/database');
 const consign = require("consign");
+const crypto = require('crypto');
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'mvc/views/public/images/upload/');
+    },
+    filename: function (req, file, cb) {
+        // const drawingName = req.body.drawing_name;
+        // const fileExtension = path.extname(file.originalname);
+        // const fileName = drawingName + fileExtension;
+        // cb(null, fileName);
+        const extensao = path.extname(file.originalname);
+
+    const fileName = crypto.createHash('md5').update(file.originalname + Date.now().toString()).digest('hex') + extensao;
+    cb(null, fileName);
+    }
+});
+
+const upload = multer({ storage: storage });
 
 const app = express();
 const db = new Database();
@@ -55,7 +76,7 @@ app.post('/login', async (req, res) => {
 
         if (result.length > 0) {
             req.session.user = {
-                id: result[0].id,
+                id: result[0].user_id,
                 username: result[0].username,
                 email: result[0].email
             };
@@ -154,9 +175,18 @@ app.get("/home", (req, res) => {
     res.render("public/colorpaint/canva", { username: req.session.user.username });
 });
 
-app.get('/gallery', (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.render('public/colorpaint/gallery', { username: req.session.user.username });
+// Rota de galeria
+app.get('/gallery', async (req, res) => {
+    if (!req.session.user) {
+        return res.redirect('/');
+    }
+    try {
+        const desenhos = await db.getUserDrawings(req.session.user.id); // Apenas desenhos do usuário logado
+        res.render('public/colorpaint/gallery', { username: req.session.user.username, desenhos });
+    } catch (error) {
+        console.error('Erro ao carregar a galeria:', error);
+        res.redirect('/error');
+    }
 });
 
 app.get('/error', (req, res) => {
@@ -253,7 +283,38 @@ app.use((err, req, res, next) => {
     res.status(500).render('ctrldev/error');
 });
 
+// Rota para upload de desenhos
+app.post('/upload', upload.single('drawing'), async (req, res) => {
+    try {
+        console.log('Arquivo recebido:', req.file);
+        const drawingName = req.body.drawing_name;
+        const drawingPath = req.file.filename; // Apenas o nome do arquivo
+        const userId = req.session.user.id; // Pegando o ID do usuário da sessão
+
+        // Validação de entrada
+        if (!drawingName || !drawingPath) {
+            console.log('Nome do desenho e caminho do desenho são obrigatórios');
+            return res.status(400).send('Nome do desenho e caminho do desenho são obrigatórios');
+        }
+
+        // Salvar no banco de dados
+        const result = await db.saveDrawing(drawingName, drawingPath, userId);
+        console.log('Desenho salvo no banco de dados:', result);
+        res.status(200).send('Desenho salvo com sucesso.');
+    } catch (error) {
+        console.error('Erro ao salvar o desenho:', error);
+        res.status(500).send('Erro ao salvar o desenho.');
+    }
+});
+
+
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
 
 module.exports = app;
+
+
+
+
+

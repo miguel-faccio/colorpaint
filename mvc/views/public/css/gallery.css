@@ -18,7 +18,7 @@ a{
 }
 
 h1 {
-    background: linear-gradient(to right, #96b4d4, #a1c1cd, #a9c9e7, #97a9e2, #abc0e6);
+    background: linear-gradient(to right, #496583, #325f97, #254c70, #6678b0, #335ead);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -77,6 +77,7 @@ body {
     justify-content: flex-start;
     border-left: 2px solid white;
     overflow: hidden;
+    z-index: 100; /* Ajuste o z-index conforme necessário */
 }
 .off-canvas.open {
     right: 0;
@@ -144,11 +145,11 @@ body {
     width: 90%;
     max-width: 1200px;
     margin: 20px auto;
-    background-color: #ffffff;
+    background-color: #ffffff6f;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+    border: 2px solid  #fff;
     animation: borderAnimation 10s infinite linear; /* Adicionamos uma animação de movimento suave */
 }
 
@@ -214,21 +215,89 @@ header {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
     gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 .gallery-item {
     background-color: #bac6d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    padding-top: calc((700 / 1080) * 100%);
+    width: 270px;
+    height: 175px;
+   
     position: relative;
     transition: transform 0.5s;
+    margin: 10px!important;
 }
-.gallery-item:hover{
+.gallery-item img{
+    width: 270px;
+    height: 175px;
+    position: relative;
+    display: inline-block;
+}
+.gallery-item .legend{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.151);
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.1);
+    padding: 5px;
+    height: 40px;
+    width: 100%; /* A largura total da imagem */
+    text-align: center; /* Centraliza o texto */
+    justify-content: center;
+    display: none; /* Inicialmente oculto */
+   
+    opacity: 0; /* Inicialmente oculto */
+    transition: opacity 10s ease;
+    animation: fade-in 0.5s forwards;
+}
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.gallery-item:hover {
     transform: scale(1.1);
+    
+}
+.gallery-item:hover .legend{
+    display: block;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    opacity: 1;
+    justify-content: space-around;
 }
 .gallery-item::after {
     content: "";
     display: block;
     padding-top: calc((700 / 1080) * 100%);
+}
+.save-button{
+    border: none;
+    background-color: #6984b4c8;
+    border-radius: 5px;
+    cursor: pointer;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s;
+}
+.save-button > span {
+    font-size: 1.8rem;
+    color: #fff;
+}
+.save-button:hover {
+    background-color: #32486F;
+    transform: scale(1.1);
 }

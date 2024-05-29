@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery</title>
-    <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galeria</title>
     <link rel="stylesheet" href="../css/gallery.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,0" />
     <link rel="shortcut icon" type="imagex/png" href="../images/logo.png">
 </head>
+
 <body>
     <div class="off-canvas">
         <video autoplay muted loop class="background-video">
@@ -26,8 +23,12 @@
             </button>
             <div class="profile">
                 <h2>Perfil do Usuário</h2>
-                <div class="username"><%= username %></div>
-                <a class="off-canvas-button" href="/logout">Logoff</a>
+                <div class="username">
+                    <%= username %>
+                </div>
+                <form action="/logout" method="POST" style="display:inline;">
+                    <button type="submit" class="off-canvas-button">Logoff</button>
+                </form>
             </div>
         </div>
     </div>
@@ -37,27 +38,34 @@
                 <span class="material-symbols-outlined">person</span>
             </button>
             <h1>Galeria de Desenhos</h1>
-            
+
             <a class="draw-button" href="/home">
                 <span class="material-symbols-outlined">brush</span>
                 Desenhar
             </a>
         </header>
-        <section class="gallery">
-            <!-- Espaços onde irão aparecer os desenhos do usuário -->
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <div class="gallery-item"></div>
-            <!-- Adicione mais itens conforme necessário -->
-        </section>
+        <div class="gallery">
+            <% if (desenhos && desenhos.length> 0) { %>
+                <% desenhos.forEach(drawing=> { %>
+                    <div class="gallery-item">
+                        <img src="../images/upload/<%= drawing.drawing_data %>" alt="<%= drawing.drawing_name %>">
+                        <div class="legend">
+                            <p>
+                                <%= drawing.drawing_name %>
+                            </p>
+                            <a href="../images/upload/<%= drawing.drawing_data %>"
+                                download="<%= drawing.drawing_data %>">
+                                <button class="save-button"><span class="material-symbols-outlined">save</span></button>
+                            </a>
+                        </div>
+                    </div>
+                    <% }) %>
+                        <% } else { %>
+                            <p>Nenhum desenho encontrado.</p>
+                            <% } %>
+        </div>
     </div>
     <script src="../js/gallery.js"></script>
 </body>
-</html>
 
-    
-</head>
-<body>
-    
-</body>
 </html>

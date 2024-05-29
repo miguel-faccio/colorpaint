@@ -110,6 +110,9 @@ canvas {
     border-radius: 10px;
     display: block;
 }
+.button__size[data-size="1"] > span {
+    height: 1px;
+}
 .button__size[data-size="5"] > span {
     height: 5px;
 }
@@ -121,6 +124,9 @@ canvas {
 }
 .button__size[data-size="30"] > span {
     height: 30px;
+}
+.button__size[data-size="40"] > span {
+    height: 40px;
 }
 .active {
     background-color: #32486F;
@@ -225,3 +231,5 @@ canvas {
     background-color: #32486F;
     transform: scale(1.1);
 }
+
+

@@ -16,8 +16,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/admin">Painel</a></li>
-                    <li><a href="/gallery">Galeria</a></li>
+                   
                     <li>
                         <form action="/logout" method="POST">
                             <button type="submit">Sair</button>
@@ -52,7 +51,7 @@
                                 <td><%= usuario.email %></td>
                                 <td>
                                     <a href="/edit-user/<%= usuario.user_id %>"><button class="edit">Editar</button></a>
-                                    <button type="button" onclick="apagar('<%= usuario.user_id %>','<%= usuario.username %>')"
+                                    <button type="button" onclick="apagarUser('<%= usuario.user_id %>','<%= usuario.username %>')"
                                         class="delete">Excluir</button>
                                 </td>
                             </tr>
@@ -66,7 +65,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Usuário ID</th>
+                            <th>Usuário</th>
                             <th>Nome do Desenho</th>
                             <th>Imagem</th>
                             <th>Ações</th>
@@ -75,15 +74,12 @@
                     <tbody>
                         <% desenhos.forEach(desenho=> { %>
                             <tr>
-                                <td><%= desenho.id %></td>
-                                <td><%= desenho.usuarios_user_id %></td>
+                                <td><%= desenho.drawing_id %></td>
+                                <td><%= desenho.username %></td>
                                 <td><%= desenho.drawing_name %></td>
-                                <td><img src="<%= desenho.url_imagem %>" alt="Desenho" width="100"></td>
+                                <td><img src="../public/images/upload/<%= desenho.drawing_data %>" alt="<%= desenho.drawing_name %>" width="100"></td>
                                 <td>
-                                    <form action="/drawing/<%= desenho.id %>" method="POST" style="display:inline;"
-                                        class="delete-form">
-                                        <button type="submit" class="delete">Excluir</button>
-                                    </form>
+                                    <button onclick="apagarDesenho('<%= desenho.drawing_id %>')" class="delete">Excluir</button>
                                 </td>
                             </tr>
                         <% }) %>
@@ -94,12 +90,22 @@
     </div>
 
     <script>
-        async function apagar(id, username, email) {
+        async function apagarUser(id, username, email) {
             const dados = await fetch('http://localhost:3000/user/' + id, { method: 'DELETE' });
             const json = await dados.json();
             console.log(json); // Mensagem de confirmação ou erro no console
             location.reload(); // Recarrega a página após a exclusão
         }
+        async function apagarDesenho(id) {
+        try {
+            const response = await fetch(`/drawing/${id}`, { method: 'DELETE' });
+            const data = await response.json();
+            console.log(data); // Mensagem de confirmação ou erro no console
+            location.reload(); // Recarrega a página após a exclusão
+        } catch (error) {
+            console.error('Erro ao excluir desenho:', error);
+        }
+    }
     </script>
 </body>
 
