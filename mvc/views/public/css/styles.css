@@ -109,12 +109,35 @@ button:hover {
 
 
 
-img {
+.logoLog {
     width: 260px; 
     height: 300px;
     position: relative;
     right: 20px;
 }
-
+.logoCad {
+    width: 260px; 
+    height: 300px;
+    position: relative;
+    left: 20px;
+}
+.cadastro-container{
+    border-right: 3px solid #ffffff; 
+    width: 260px;
+    position: relative;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+.cadastro-container {
+    margin-right: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
 
   

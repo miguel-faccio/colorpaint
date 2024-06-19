@@ -310,7 +310,7 @@ app.post('/upload', upload.single('drawing'), async (req, res) => {
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, () => console.log(`Colorpaint in air in port ${PORT}`));
 
 module.exports = app;
 
